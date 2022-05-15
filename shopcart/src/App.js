@@ -2,7 +2,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import NavBar from './components/navbar';
-import Product from './components/products';
+// import Product from './components/products';
+import DisplayProduct from './components/displayproducts';
 import data from './data';
 import { useState } from 'react';
 
@@ -90,7 +91,7 @@ class App extends Component {
       <div className='App container'>
         <NavBar sum={this.state.products.map((product) => parseInt(product.value)).reduce((acc, value) => acc + value)} />
         {this.state.products.map(prod =>
-          <Product key={prod.id} id={prod.id} image={prod.image} title={prod.desc} desc={prod.desc} rating={prod.rating} value={prod.value} 
+          <DisplayProduct key={prod.id} id={prod.id} image={prod.image} title={prod.desc} desc={prod.desc} rating={prod.rating} value={prod.value} 
             handleQuantityChange={this.handleQuantityChange} />
             // handelAdd={this.handelAdd}
             // handelRemove={this.handelRemove}/>
