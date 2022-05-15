@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 // import Rating from '@mui/material/Rating';
 // import CloseIcon from '@mui/icons-material/Close';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
+import { faPlusSquare, faMinusSquare } from "@fortawesome/free-solid-svg-icons";
 
 
 const style = {
@@ -21,21 +21,31 @@ const style = {
   };
 
 function Product(props) {
-    return (
-            
+    
+    return (        
     <div className='border px-4 py-2'>       
-                <h4 className='col-lg-2 text-left'>{props.desc}</h4>
-                <div className='d-block d-flex align-items-center'>
+                <h4 className='col-lg-3 text-left'>{props.title}</h4>
+                <div className='d-block d-flex align-items-center col-sm-6'>
                     <img src={props.image} alt={props.desc} width="150" />
-                    <input 
-                        className='col-md-1 mx-4'
-                        type="number" 
-                        defaultValue={props.value}
+                    <FontAwesomeIcon 
+                        icon={faPlusSquare} 
+                        onClick={() => props.handleQuantityChange(props.value, props.id, 1)}
+                        className='Add grey-color' />
+                    <FontAwesomeIcon 
+                        icon={faMinusSquare} 
+                        onClick={() => props.handleQuantityChange(props.value, props.id, -1)}
+                        className='Remove grey-color' />
+                    <div className='d-block d-inline-block col-sm-1 justify-content-center'>
+                        <span>Quantity</span>
+                        <input 
+                        // className='col-md-1 mx-4'
+                        id="itemQuantity"
+                        type="text" 
+                        value={props.value}
                         min="0"
-                        // onChange={(event) => props.handleQuantityChange(event.target.value, props.id)}
-                        onChange={(event) => props.handleQuantityChange(event.target.value, props.id)} 
-                    ></input>
-                    <span>quantity</span>
+                        onChange={(event) => props.handleQuantityChange(event.target.value, props.id)}
+                        ></input>
+                    </div>
                 </div>
     </div>
     );
