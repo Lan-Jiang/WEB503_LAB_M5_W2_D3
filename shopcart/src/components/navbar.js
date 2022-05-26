@@ -8,33 +8,46 @@ import {
     Route,
     Link
   } from "react-router-dom";
-// import DisplayProduct from "./components/displayproducts";
+import DisplayProducts from "./displayproducts";
+import ShowCart from "./showcart"
 
-class NavBar extends React.Component {
-    render(props) { 
-        return (
+function NavBar(props) {
+    return (
         <Router>
-        <div className="navbar bg-info">
-            <h3 className="navbar-left mx-4 my-4 text-white">Shop 2 <Link to="/"><FontAwesomeIcon icon={faRegistered} /></Link>eact</h3>
-            <div className='navbar-right mx-4'>
-            <Link to="/showCart">< FontAwesomeIcon icon={faShoppingCart} /></Link>
-            <span> {this.props.sum} Item(s)</span> 
+            <div className="navbar p-5 bg-info">
+                <h1>
+                    <Link to="/" className="text-decoration-none text-white">
+                    <span className="px-2">Shop 2</span> 
+                    <FontAwesomeIcon icon={faRegistered} className="fas fa-lg text-white"/>eact</Link>
+                </h1>
+                
+                <p className="text-white">
+                <Link to="/showcart">
+                    <FontAwesomeIcon icon={faShoppingCart} className="fas fa-lg mx-3 text-white"/>
+                </Link>
+                <span className="font-weight-bold text-white">{props.totalValue}</span> items</p>
             </div>
-        </div>
+            
+            <Routes>
+                <Route 
+                    exact path="/" 
+                    element={
+                        <DisplayProducts 
+                            products={props.prods}
+                            OnQuantityChange={props.handleQuantityChange}
+                        />}
+                >
 
-        <Routes>
-            <Route
-                path="/"
-                element={
-                 <div>
-                     <p></p>
-                 </div>
-                }
-            />
-        </Routes>
+                </Route>
+                <Route 
+                    path="/showcart" 
+                    element={
+                        <ShowCart cartitems={props.prods}/>}
+                >
+                </Route>
+            </Routes>
         </Router>
-        );
-    }
+    )
 }
  
 export default NavBar;
